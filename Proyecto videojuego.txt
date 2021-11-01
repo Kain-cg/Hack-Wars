@@ -1,0 +1,14 @@
+- Crear clase para personajes
+
+Crear el sistema de puertas / eventos
+
+Crear una puerta que, funcione de principio a fin, repetidas veces
+
+Crear sistema de keybinds para los disparos, su daño y la puerta / el evento que atacan
+
+Crear sistema de puntos (escondido) que permita terminar el juego o spawnear el jefe final
+
+Crear sistema de vidas del usuario, probar la dificultad
+
+
+
