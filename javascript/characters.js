@@ -1,5 +1,5 @@
 class Character {
-    constructor (ctx, posX, posY, width, height, points, imageName) {
+    constructor (ctx, posX, posY, width, height, fillStyle, points) {
 
     this.ctx = ctx;
     this.posX = posX;
@@ -7,7 +7,8 @@ class Character {
     this.width = width;
     this.height = height;
     this.points = points;
-    this.imageName = imageName;
+    // this.imageName = imageName;
+    this.fillStyle = fillStyle;
 
     // this.hp = hp;
     // this.enemyType = enemyType;
@@ -18,20 +19,20 @@ class Character {
 }
 
 draw() {
-    this.ctx.fillStyle = 'green';
-
-    this.ctx.fillRect(this.posX, this.posY, this.width, this.height)
-    
+    this.ctx.fillStyle = this.fillStyle;
+    this.ctx.fillRect(this.posX, this.posY, this.width, this.height);
   }
 
 }
 
-const stormtrooper = new Character(this.ctx, 200, 200, 290, 460, 5, "trooper1.png");
+// var randomCreate = Math.floor(Math.random() * 10);
 
-const jawa = new Character(1, "jawa", 5, "alive");
+// const stormtrooper = new Character(this.ctx, 200, 200, 290, 460, 5, "trooper1.png");
 
-const bobaFett = new Character(10, "bobaFett", 5, "alive");
+// const jawa = new Character(1, "jawa", 5, "alive");
 
-console.log(bobaFett);
-console.log(stormtrooper);
-console.log(jawa);
+// const bobaFett = new Character(10, "bobaFett", 5, "alive");
+
+// console.log(bobaFett);
+// console.log(stormtrooper);
+// console.log(jawa);

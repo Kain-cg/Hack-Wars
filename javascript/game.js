@@ -1,3 +1,5 @@
+var randomCreate = Math.floor(Math.random() * 10);
+
 const hackWars = {
   name: "HackWars",
   description: "Shooter desarrollado durante el bootcamp de Ironhack",
@@ -14,8 +16,11 @@ const hackWars = {
   framesCounter: 0,
   seconds: 0,
   enemies: [],
+  enemies2: [],
+  enemies3: [],
   score: 0,
   playerHP: 3,
+  randomCreate: undefined,
   keys: {
     player: {
       Q: "q", // KeyQ
@@ -31,7 +36,6 @@ const hackWars = {
     this.createAll();
     this.setListeners();
     this.start();
-    
   },
 
   setContext() {
@@ -57,18 +61,21 @@ const hackWars = {
 
       if (this.seconds && this.seconds % 2 === 0) {
         this.seconds = 0;
-        if (this.enemies.length === 0) {
+        const randomNumber = Math.floor(Math.random() * 3)
+        if (randomNumber === 0 && this.enemies.length === 0){
           this.createEnemies();
 
-        } else if (this.enemies.length > 0) {
-          this.clearEnemies()
-        }
+        } else if (randomNumber === 1 && this.enemies2.length === 0) {
+          this.createEnemies2();
+
+        } else if (randomNumber === 2 && this.enemies3.length === 0) {
+          this.createEnemies3();
+
+        } else if (this.enemies.length > 0 || this.enemies2.length > 0) {
+        this.clearEnemies();
       }
 
-      // if (this.seconds && this.seconds % 10 === 0) {
-      //   this.seconds = 0;
-      //   this.clearEnemies();
-      // }
+    }
 
       this.drawAll()
 
@@ -84,6 +91,11 @@ const hackWars = {
   
     }, 1000 / this.frames)
   },
+
+  // random() {
+  //   this.randomCreate = Math.floor(Math.random() * 10);
+  //   console.log("hola random");
+  // },
   
   drawAll() {
     this.drawBackground();
@@ -95,7 +107,10 @@ const hackWars = {
   },
 
   drawEnemies() {
-    this.enemies.forEach(enem => enem.draw())
+    this.enemies.forEach(enem => enem.draw());
+    this.enemies2.forEach(enem => enem.draw());
+    this.enemies3.forEach(enem => enem.draw());
+
   },
  
 
@@ -113,22 +128,59 @@ const hackWars = {
 
   createEnemies() {
 
-    // setTimeout(()=>{
-      this.enemies.push(new Character(this.ctx, 100, 100, 80, 80));
-    // }, 5000);
+      this.enemies.push(new Character(this.ctx, 100, 100, 80, 80, 'green'));
        console.log("enemigo creado");
-    
   },
 
-  killEnemies() {
+  createEnemies2() {
+
+    this.enemies2.push(new Character(this.ctx, 200, 100, 80, 80, 'red'));
+      console.log("enemigo 2 creado");
+
+  },
+
+  createEnemies3() {
+
+    this.enemies3.push(new Character(this.ctx, 300, 100, 80, 80, 'blue'));
+      console.log("enemigo 3 creado");
+
+  },
+
+  killEnemies(key) {
     
-    if (this.enemies.length > 0) {
+    if (key === 'Q' && this.enemies.length > 0) {
       this.enemies.splice(0,1);
-      this.score += 10;
+      this.score += 5;
       console.log(this.score);
-    }
+    } else if (key === 'W' && this.enemies2.length > 0) {
+      this.enemies2.splice(0,1);
+      this.score += 5;
+      console.log(this.score);
+    } else if (key === "E" && this.enemies3.length > 0) {
+      this.enemies3.splice(0,1);
+      this.score += 5;
+      console.log(this.score);
+    } 
+    // falta else if enemies3 blabla
+    
+
+    // if (this.enemies.length > 0) {
+    //   this.enemies.splice(0,1);
+    //   this.score += 5;
+    //   console.log(this.score);
+    // }
 
   },
+
+  // killEnemiesW() {
+    
+  //   if (this.enemies2.length > 0) {
+  //     this.enemies2.splice(0,1);
+  //     this.score += 5;
+  //     console.log(this.score);
+  //   }
+
+  // },
 
   clearEnemies() {
 
@@ -136,8 +188,15 @@ const hackWars = {
       this.enemies.splice(0,1);
       this.playerHP--;
       console.log(this.playerHP);
+    } else if (this.enemies2.length > 0) {
+      this.enemies2.splice(0,1);
+      this.playerHP--;
+      console.log(this.playerHP);
+    } else if (this.enemies3.length > 0) {
+      this.enemies3.splice(0,1);
+      this.playerHP--;
+      console.log(this.playerHP);
     }
-
   },
 
   // loseHP() {
@@ -163,13 +222,15 @@ const hackWars = {
     document.onkeyup = (e) => {
 
       if (e.key === this.keys.player.Q) {
-        this.killEnemies();
+        this.killEnemies('Q');
         console.log("hola Q");
       }
       if (e.key === this.keys.player.W) {
+        this.killEnemies('W');
         console.log("hola W");
       }
       if (e.key === this.keys.player.E) {
+        this.killEnemies('E');
         console.log("hola E");
       }
     }
