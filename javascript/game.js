@@ -19,7 +19,7 @@ const hackWars = {
   enemies2: [],
   enemies3: [],
   score: 0,
-  playerHP: 3,
+  playerHP: 5,
   randomCreate: undefined,
   keys: {
     player: {
@@ -59,7 +59,7 @@ const hackWars = {
         this.seconds++;
       }
 
-      if (this.seconds && this.seconds % 2 === 0) {
+      if (this.seconds && this.seconds % 1 === 0) {
         this.seconds = 0;
         const randomNumber = Math.floor(Math.random() * 3)
         if (randomNumber === 0 && this.enemies.length === 0){
@@ -84,7 +84,7 @@ const hackWars = {
         console.log("you lose, sucka")
       }
 
-      if (this.score === 100) {
+      if (this.score === 200) {
         this.winGame();
         console.log("a winner is you")
       }
@@ -115,33 +115,25 @@ const hackWars = {
  
 
   createBackground() {
-    this.background = new Background(
-      this.ctx,
-      0,
-      0,
-      this.canvasSize.width,
-      this.canvasSize.height,
-      5,
-      "bg.jpg"
-    );
+    this.background = new Background(this.ctx, 0,  0,  this.canvasSize.width,  this.canvasSize.height,  5,  "background_2.png");
   },
 
   createEnemies() {
 
-      this.enemies.push(new Character(this.ctx, 100, 100, 80, 80, 'green'));
+      this.enemies.push(new Character(this.ctx, 90, 360, 150, 240, 'trooper1.png'));   //100
        console.log("enemigo creado");
   },
 
   createEnemies2() {
 
-    this.enemies2.push(new Character(this.ctx, 200, 100, 80, 80, 'red'));
+    this.enemies2.push(new Character(this.ctx, 570, 340, 150, 240, 'trooper1.png'));    //618
       console.log("enemigo 2 creado");
 
   },
 
   createEnemies3() {
 
-    this.enemies3.push(new Character(this.ctx, 300, 100, 80, 80, 'blue'));
+    this.enemies3.push(new Character(this.ctx, 1050, 340, 150, 240, 'darktrooper1.png'));     //1160
       console.log("enemigo 3 creado");
 
   },
@@ -152,14 +144,31 @@ const hackWars = {
       this.enemies.splice(0,1);
       this.score += 5;
       console.log(this.score);
-    } else if (key === 'W' && this.enemies2.length > 0) {
+    
+    } 
+    else if (key === 'Q' && this.enemies.length === 0){
+      this.playerHP--
+      console.log(this.playerHP)
+    }
+
+    
+    else if (key === 'W' && this.enemies2.length > 0) {
       this.enemies2.splice(0,1);
       this.score += 5;
       console.log(this.score);
-    } else if (key === "E" && this.enemies3.length > 0) {
+    } 
+    else if (key === 'W' && this.enemies2.length === 0){
+      this.playerHP--
+      console.log(this.playerHP)
+    
+    }else if (key === "E" && this.enemies3.length > 0) {
       this.enemies3.splice(0,1);
       this.score += 5;
       console.log(this.score);
+    }
+    else if (key === 'E' && this.enemies3.length === 0){
+      this.playerHP--
+      console.log(this.playerHP)
     } 
     // falta else if enemies3 blabla
     

@@ -29,13 +29,7 @@ class Background {
 
   draw() {
     this.ctx.drawImage(this.imageInstance, this.pos.x, this.pos.y, this.size.width, this.size.height)
-    this.ctx.drawImage(this.imageInstance, this.pos.x + this.size.width, this.pos.y, this.size.width, this.size.height)
   }
 
-  move() {
-    if (this.pos.x < -this.size.width) {
-      this.pos.x = 0
-    }
-    this.pos.x -= this.speed.x
-  }
+  
 }
