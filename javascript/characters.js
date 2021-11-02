@@ -1,13 +1,14 @@
 class Character {
-    constructor (ctx, posX, posY, width, height, imageName, points) {
+    constructor (imageName, height, width, points, enemyHP) {
 
-    this.ctx = ctx;
-    this.posX = posX;
-    this.posY = posY;
+    // this.ctx = ctx;
+    // this.posX = posX;
+    // this.posY = posY;
     this.width = width;
     this.height = height;
     this.points = points;
     this.imageName = imageName;
+    this.enemyHP = enemyHP
 
     this.init();
 /*     this.fillStyle = fillStyle;
@@ -31,8 +32,8 @@ init() {
   this.imageInstance.src = `img/${this.imageName}`
 }
 
-draw() {
-  this.ctx.drawImage(this.imageInstance, this.posX, this.posY, this.width, this.height)
+draw(ctx, pos) {
+  ctx.drawImage(this.imageInstance, pos.posX, pos.posY, this.width, this.height)
 }
 
 
