@@ -1,5 +1,3 @@
-var randomCreate = Math.floor(Math.random() * 10);
-
 const hackWars = {
   name: "HackWars",
   description: "Shooter desarrollado durante el bootcamp de Ironhack",
@@ -24,7 +22,6 @@ const hackWars = {
   allEnemies: [],
   score: 0,
   playerHP: 5,
-  randomCreate: undefined,
   keys: {
     player: {
       Q: "q", // KeyQ
@@ -96,8 +93,16 @@ const hackWars = {
         this.winGame();
         console.log("a winner is you");
       }
+
+      this.clearEnemies()
   
     }, 1000 / this.frames)
+  },
+  
+  pickRandomEnemy() {
+    const randomEnemyIndex = Math.floor(Math.random() * this.allEnemies.length);
+    let randomEnemy = this.allEnemies[randomEnemyIndex];
+    return randomEnemy
   },
 
   randomPlacement() {
@@ -106,35 +111,41 @@ const hackWars = {
       this.seconds++;
     }
 
-    const pickEnemy = Math.floor(Math.random() * this.allEnemies.length);
-    let enemy = this.allEnemies[pickEnemy];
+    const enemy = this.pickRandomEnemy()
 
     if (this.seconds && this.seconds % 2 === 0) {
       this.seconds = 0;
       const randomNumber = Math.floor(Math.random() * 3)
       
-      if (randomNumber === 0 && this.leftEnemy.length === 0){
-        this.leftEnemy.push(enemy);
-
-      } else if (randomNumber === 1 && this.middleEnemy.length === 0) {
-        this.middleEnemy.push(enemy);
-
-      } else if (randomNumber === 2 && this.rightEnemy.length === 0) {
-        this.rightEnemy.push(enemy);
-
-      } else if (this.leftEnemy.length > 0 || this.middleEnemy.length > 0 || this.rightEnemy.length > 0) {
-      this.clearEnemies();
+      this.createEnemy(randomNumber, enemy)
     }
-
-  }
-
   },
+
+  createEnemy(randomNumber, enemy) {
+
+    if (randomNumber === 0 && this.leftEnemy.length === 0){
+      this.leftEnemy.push(new Character(...enemy));
+
+    } else if (randomNumber === 1 && this.middleEnemy.length === 0) {
+      this.middleEnemy.push(new Character(...enemy));
+
+    } else if (randomNumber === 2 && this.rightEnemy.length === 0) {
+      this.rightEnemy.push(new Character(...enemy));
+    }
+    //  else if (this.leftEnemy.length > 0 || this.middleEnemy.length > 0 || this.rightEnemy.length > 0) {
+    //   this.clearEnemies();
+    // }
+  },
+
 
   setGameVariables() {
     this.leftDoor = new Position(90, 340);
     this.middleDoor = new Position(570, 340);
     this.rightDoor = new Position(1050, 340);
-    this.allEnemies = [stormtrooper, darktrooper];
+    this.allEnemies = [
+      ['trooper1.png', 150, 240, 5, 1, 2000], 
+      ['darktrooper1.png', 150, 240, 10, 3, 3000]  
+    ];
   },
   
   drawAll() {
@@ -180,7 +191,7 @@ const hackWars = {
     if (key === 'Q' && this.leftEnemy.length > 0) {
       this.leftEnemy.splice(0,1);
       this.score += 5;
-      this.blaster1.play();
+      // this.blaster1.play();
       console.log(this.score);
     } 
     else if (key === 'Q' && this.leftEnemy.length === 0){
@@ -227,19 +238,51 @@ const hackWars = {
 
   clearEnemies() {
 
-    if (this.leftEnemy.length > 0) {
-      this.leftEnemy.splice(0,1);
-      this.playerHP--;
-      console.log(this.playerHP);
-    } else if (this.middleEnemy.length > 0) {
-      this.middleEnemy.splice(0,1);
-      this.playerHP--;
-      console.log(this.playerHP);
-    } else if (this.rightEnemy.length > 0) {
-      this.rightEnemy.splice(0,1);
-      this.playerHP--;
-      console.log(this.playerHP);
-    }
+    this.leftEnemy.filter((enemy, index) => {
+      if (enemy.toDelete) {
+        console.log('soy todelete de la izq')
+        this.leftEnemy.splice(index, 1);
+        this.playerHP--;
+      } else {
+        return enemy
+      }
+    })
+
+    this.middleEnemy.filter((enemy, index) => {
+      if (enemy.toDelete) {
+        console.log('soy todelete del medio')
+        this.middleEnemy.splice(index, 1);
+        this.playerHP--;
+      } else {
+        return enemy
+      }
+    })
+
+    this.rightEnemy.filter((enemy, index) => {
+      if (enemy.toDelete) {
+        console.log('soy todelete de la dcha')
+        this.rightEnemy.splice(index, 1);
+        this.playerHP--;
+      } else {
+        return enemy
+      }
+    })
+
+    // if (this.leftEnemy.length > 0) {
+    //   this.leftEnemy.splice(0,1);
+    //   this.playerHP--;
+    //   console.log(this.playerHP);
+    // } 
+    // if (this.middleEnemy.length > 0) {
+    //   this.middleEnemy.splice(0,1);
+    //   this.playerHP--;
+    //   console.log(this.playerHP);
+    // } 
+    // if (this.rightEnemy.length > 0) {
+    //   this.rightEnemy.splice(0,1);
+    //   this.playerHP--;
+    //   console.log(this.playerHP);
+    // }
   },
 
   // loseHP() {

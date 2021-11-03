@@ -1,5 +1,5 @@
 class Character {
-    constructor (imageName, height, width, points, enemyHP) {
+    constructor (imageName, height, width, points, enemyHP, lifeTime) {
 
     // this.ctx = ctx;
     // this.posX = posX;
@@ -8,8 +8,9 @@ class Character {
     this.height = height;
     this.points = points;
     this.imageName = imageName;
-    this.enemyHP = enemyHP
-
+    this.enemyHP = enemyHP;
+    this.toDelete = false;
+    this.lifeTime = lifeTime;
     this.init();
 /*     this.fillStyle = fillStyle;
  */
@@ -30,6 +31,9 @@ class Character {
 init() {
   this.imageInstance = new Image()
   this.imageInstance.src = `img/${this.imageName}`
+  setTimeout(() => this.toDelete = true, this.lifeTime);
+
+
 }
 
 draw(ctx, pos) {
@@ -39,8 +43,8 @@ draw(ctx, pos) {
 
 }
 
-const stormtrooper = new Character('trooper1.png', 150, 240, 5, 1);
-const darktrooper = new Character('darktrooper1.png', 150, 240, 10, 3);
+// const stormtrooper = new Character('trooper1.png', 150, 240, 5, 1, 3000);
+// const darktrooper = new Character('darktrooper1.png', 150, 240, 10, 3, 5000);
 // var randomCreate = Math.floor(Math.random() * 10);
 
 // const stormtrooper = new Character(this.ctx, 200, 200, 290, 460, 5, "trooper1.png");
