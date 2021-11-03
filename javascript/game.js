@@ -1,10 +1,3 @@
-const sounds = {
-  music: new Audio("sounds/Star Wars Rebels.mp3"),
-  playerBlaster: new Audio("sounds/blaster-solo.wav"),
-  enemyBlaster: new Audio("sounds/blaster-imp.wav")
-};
-
-
 const hackWars = {
   name: "HackWars",
   description: "Shooter desarrollado durante el bootcamp de Ironhack",
@@ -29,7 +22,7 @@ const hackWars = {
   allEnemies: [],
   score: 0,
   playerHP: 5,
-  playerHpArray: ['\&#x24;','\&#x24;','\&#x24;', '\&#x24;','\&#x24;'],          // crear una clase playerHpArray y añadirle de atributo un imageName como en el background.
+  playerHpArray: ['a;','a;','a;', 'a;','a;'],          // crear una clase playerHpArray y añadirle de atributo un imageName como en el background.
   keys: {
     player: {
       Q: "q", // KeyQ
