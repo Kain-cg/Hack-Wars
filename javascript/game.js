@@ -1,3 +1,10 @@
+const sounds = {
+  music: new Audio("sounds/Star Wars Rebels.mp3"),
+  playerBlaster: new Audio("sounds/blaster-solo.wav"),
+  enemyBlaster: new Audio("sounds/blaster-imp.wav")
+};
+
+
 const hackWars = {
   name: "HackWars",
   description: "Shooter desarrollado durante el bootcamp de Ironhack",
@@ -20,10 +27,9 @@ const hackWars = {
   middleEnemy: [],
   rightEnemy: [],
   allEnemies: [],
-  music: undefined,
   score: 0,
   playerHP: 5,
-  playerHpArray: ['trooper1.png','a','a', 'a','a'],          // crear una clase playerHpArray y añadirle de atributo un imageName como en el background.
+  playerHpArray: ['\&#x24;','\&#x24;','\&#x24;', '\&#x24;','\&#x24;'],          // crear una clase playerHpArray y añadirle de atributo un imageName como en el background.
   keys: {
     player: {
       Q: "q", // KeyQ
@@ -56,8 +62,10 @@ const hackWars = {
 
   start() {
     
-    this.music = new Audio("../sounds/Star Wars Rebels.mp3")
-    this.music.play()
+/*     sounds.music.preload = "auto";
+     sounds.music.load();
+     sounds.music.play();
+     sounds.music.volume = 0.6; */
     this.intervalId = setInterval(() => {
       this.framesCounter++;
 
@@ -265,6 +273,7 @@ const hackWars = {
         this.leftEnemy.splice(index, 1);
         this.playerHP--;
         this.playerHpArray.splice(0,1);
+        sounds.enemyBlaster.play();
       } else {
         return enemy
       }
@@ -276,6 +285,7 @@ const hackWars = {
         this.middleEnemy.splice(index, 1);
         this.playerHP--;
         this.playerHpArray.splice(0,1);
+        sounds.enemyBlaster.play();
       } else {
         return enemy
       }
@@ -287,6 +297,8 @@ const hackWars = {
         this.rightEnemy.splice(index, 1);
         this.playerHpArray.splice(0,1);
         this.playerHP--;
+        sounds.enemyBlaster.play();
+        
       } else {
         return enemy
       }
@@ -321,6 +333,8 @@ const hackWars = {
 
   gameOver() {
     clearInterval(this.intervalId);
+/*     sounds.music.pause();
+    sounds.music.currentTime = 0; */
   },
 
   winGame() {
@@ -333,14 +347,17 @@ const hackWars = {
 
       if (e.key === this.keys.player.Q) {
         this.killEnemies('Q');
+        sounds.playerBlaster.play();
         console.log("hola Q");
       }
       if (e.key === this.keys.player.W) {
         this.killEnemies('W');
+        sounds.playerBlaster.play();
         console.log("hola W");
       }
       if (e.key === this.keys.player.E) {
         this.killEnemies('E');
+        sounds.playerBlaster.play();
         console.log("hola E");
       }
     }
