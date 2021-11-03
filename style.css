@@ -1,6 +1,24 @@
+/* .SplashScreen {
+    display: show;
+    background-color: red;
+    width: 100%;
+    height: 100%;
+}
+
+.SplashScreenOff {
+    display: none;
+}
+
+
+
+#canvas {
+    height: 720px;
+    width: 1280px;
+    display: none;
+} */
+
 #game-board {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
