@@ -20,15 +20,16 @@ const hackWars = {
   middleEnemy: [],
   rightEnemy: [],
   allEnemies: [],
+  music: undefined,
   score: 0,
   playerHP: 5,
+  playerHpArray: ['trooper1.png','a','a', 'a','a'],          // crear una clase playerHpArray y añadirle de atributo un imageName como en el background.
   keys: {
     player: {
       Q: "q", // KeyQ
       W: "w", // KeyW
       E: "e", //KeyE
     },
-  playerHP: 3,
   },
 
   init() {
@@ -54,6 +55,9 @@ const hackWars = {
   },
 
   start() {
+    
+    this.music = new Audio("../sounds/Star Wars Rebels.mp3")
+    this.music.play()
     this.intervalId = setInterval(() => {
       this.framesCounter++;
 
@@ -95,9 +99,26 @@ const hackWars = {
       }
 
       this.clearEnemies()
+
+      this.scoreWall()
+      this.lifeWall()
+    
   
     }, 1000 / this.frames)
   },
+
+  scoreWall() {
+      this.ctx.fillStyle = 'white'
+      this.ctx.font = "100px border 1px solid white"
+      this.ctx.fillText('Score: ' + this.score, 40, 100)
+  },
+
+
+  lifeWall() {
+    this.ctx.fillStyle = 'white'
+    this.ctx.font = "40px Star Jedi"
+    this.ctx.fillText('Lives: ' + this.playerHpArray, 1000, 650)
+},
   
   pickRandomEnemy() {
     const randomEnemyIndex = Math.floor(Math.random() * this.allEnemies.length);
@@ -143,8 +164,8 @@ const hackWars = {
     this.middleDoor = new Position(570, 340);
     this.rightDoor = new Position(1050, 340);
     this.allEnemies = [
-      ['trooper1.png', 150, 240, 5, 1, 2000], 
-      ['darktrooper1.png', 150, 240, 10, 3, 3000]  
+      ['trooper1.png', 220, 150, 5, 1, 2000], 
+      ['darktrooper1.png', 220, 150, 10, 3, 3000]  
     ];
   },
   
@@ -243,6 +264,7 @@ const hackWars = {
         console.log('soy todelete de la izq')
         this.leftEnemy.splice(index, 1);
         this.playerHP--;
+        this.playerHpArray.splice(0,1);
       } else {
         return enemy
       }
@@ -253,6 +275,7 @@ const hackWars = {
         console.log('soy todelete del medio')
         this.middleEnemy.splice(index, 1);
         this.playerHP--;
+        this.playerHpArray.splice(0,1);
       } else {
         return enemy
       }
@@ -262,6 +285,7 @@ const hackWars = {
       if (enemy.toDelete) {
         console.log('soy todelete de la dcha')
         this.rightEnemy.splice(index, 1);
+        this.playerHpArray.splice(0,1);
         this.playerHP--;
       } else {
         return enemy
