@@ -39,6 +39,8 @@ draw(ctx, pos) {
 
 }
 
+const stormtrooper = new Character('trooper1.png', 150, 240, 5, 1);
+const darktrooper = new Character('darktrooper1.png', 150, 240, 10, 3);
 // var randomCreate = Math.floor(Math.random() * 10);
 
 // const stormtrooper = new Character(this.ctx, 200, 200, 290, 460, 5, "trooper1.png");

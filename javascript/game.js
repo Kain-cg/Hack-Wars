@@ -1,8 +1,5 @@
 var randomCreate = Math.floor(Math.random() * 10);
 
-const stormtrooper = new Character('trooper1.png', 150, 240, 5, 1);
-const darktrooper = new Character('darktrooper1.png', 150, 240, 10, 3);
-
 const hackWars = {
   name: "HackWars",
   description: "Shooter desarrollado durante el bootcamp de Ironhack",
