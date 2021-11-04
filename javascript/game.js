@@ -73,7 +73,7 @@ const hackWars = {
         console.log("you lose, sucka");
       }
 
-      if (this.score === 300) {
+      if (this.score >= 350) {
         this.winGame();
         console.log("a winner is you");
       }
@@ -118,6 +118,9 @@ const hackWars = {
     if (this.score >= 150) {
       return spawnSpeedIncrease = 10;
     }
+    if (this.score >= 250) {
+      return spawnSpeedIncrease = 5;
+    }
   },
 
   randomPlacement() {
@@ -156,8 +159,9 @@ const hackWars = {
     this.rightDoor = new Position(1050, 340);
     this.allEnemies = [
       ['trooper1.png', 220, 150, 5, 1, 2000, 1], 
-      ['darktrooper1.png', 220, 150, 10, 3, 3000, 1],
-      ['ar2di2.png', 220, 150, -25, 1, 2000, 0]  
+      ['darktrooper1.png', 230, 150, 10, 3, 1500, 1],
+      ['ar2di2.png', 220, 150, -25, 1, 2000, 0],
+      ['jawa.png', 220, 150, 20, 1, 1000, 0],
     ];
   },
   
@@ -227,10 +231,14 @@ const hackWars = {
     clearInterval(this.intervalId);
     sounds.music.pause();
     sounds.music.currentTime = 0;
+    GameOverSplash();
   },
 
   winGame() {
     clearInterval(this.intervalId);
+    sounds.music.pause();
+    sounds.music.currentTime = 0;
+    victorySplash();
   },
 
   setListeners () {

@@ -31,8 +31,9 @@ h1 {
     text-decoration: none;
     background-color: transparent;
     border: 0;
+    font-family: star jedi;
     color: white;
-    font-size: 2em;
+    font-size: 3em;
     margin-top: 50px;
     font: "Starjedi.ttf";
 }
@@ -43,8 +44,51 @@ h1 {
     border: 0;
     color: #fccc06;
     font-size: 3em;
-    margin: 100px 0 0 100px;
+    margin: 10px 0 0 100px;
     font: "Starjedi.ttf";
+}
+
+.instructions {
+    display: flex;
+    justify-content: space-between;
+    align-items:baseline;
+}
+
+.button-list {
+    font-family: star jedi;
+    color: white;
+    width: 300px;
+    height: 200px;
+    padding-left: 20%;
+}
+
+.key-prompt {
+    height: 50px;
+    width: 50px;
+}
+
+.enemy-list {
+    font-family: star jedi;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items:baseline;
+    width: 350px;
+    height: 300px;
+    padding-right: 10%;
+}
+
+.enemydiv {
+    display: flex;
+    justify-content: left;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.mugshot {
+    height: 50px;
+    width: 50px;
 }
 
 .screen-off {
@@ -61,4 +105,38 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.gameover {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1280px;
+    height: 720px;
+}
+
+.gameoverimg {
+    width: 1280px;
+    height: 720px;
+}
+
+.retry-button { 
+    text-decoration: none;
+    background-color: transparent;
+    border: 0;
+    color: #fccc06;
+    font-size: 3em;
+    margin: 20px auto;
+    font: "starjedi";
+}
+
+.back-btn {
+    text-decoration: none;
+    background-color: transparent;
+    border: 0;
+    color: #fccc06;
+    font-size: 3em;
+    margin: 20px auto;
+    font: "starjedi";
 }

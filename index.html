@@ -13,8 +13,37 @@
   <div id="splash-screen">
     
       <img class="center" src="./img/title.png">
-      <input class="start-button center" type="button" value="Start">
 
+      <div class="instructions">
+
+        <div class="button-list">
+          <img class="key-prompt" src="img/Q-Key.png">
+          <img class="key-prompt" src="img/W-Key.png">
+          <img class="key-prompt" src="img/E-Key.png">
+          <h2>Each key shoots down a lane</h2>
+        </div>
+
+        <input class="start-button" type="button" value="Start">
+
+        <div class="enemy-list">
+          <div class="enemydiv">
+            <img class="mugshot" src="img/trooperhead.png">
+            <p>Stormtrooper &nbsp&nbsp&nbsp&nbsp 5 points</p>
+          </div>
+          <div class="enemydiv">
+            <img class="mugshot" src="img/darktrooperhead.png">
+            <p>Dark Trooper &nbsp&nbsp&nbsp&nbsp 10 points</p>
+          </div>
+          <div class="enemydiv">
+            <img class="mugshot" src="img/jawahead.png">
+            <p>Jawa &nbsp&nbsp&nbsp&nbsp 20 points</p>
+          </div>
+          <div class="enemydiv">
+            <img class="mugshot" src="img/r2head.png">
+            <p>R2D2 &nbsp&nbsp&nbsp&nbsp -25 points</p>
+          </div>
+        </div>
+      </div> 
   </div>
 
   <div id="introdiv" class="screen-off">
@@ -22,6 +51,22 @@
     <input class="launch-button" type="button" value="Start >>">
     <video id="roller" class="center" width="1280" height="720">
     <source src="img/roller.mp4" type=video/mp4>
+
+  </div>
+
+  <div id="lose-screen" class="screen-off">
+
+    <input class="retry-button" type="button" value="Retry >>">
+    <video id="lose-vid" class="center" width="1280" height="720">
+    <source src="img/gameover.mp4" type=video/mp4>
+
+  </div>
+
+  <div id="win-screen" class="screen-off">
+
+    <input class="back-btn" type="button" value="Retry >>">
+    <video id="win-vid" class="center" width="1280" height="720">
+    <source src="img/victory.mp4" type=video/mp4>
 
   </div>
 
