@@ -78,8 +78,7 @@ const hackWars = {
         console.log("a winner is you");
       }
 
-      this.clearEnemies()
-
+      this.clearAllEnemies()
       this.scoreWall()
       this.lifeWall()
     
@@ -158,7 +157,7 @@ const hackWars = {
     this.allEnemies = [
       ['trooper1.png', 220, 150, 5, 1, 2000, 1], 
       ['darktrooper1.png', 220, 150, 10, 3, 3000, 1],
-      // ['ar2di2.png', 220, 150, -25, 1, 2000, 0]  
+      ['ar2di2.png', 220, 150, -25, 1, 2000, 0]  
     ];
   },
   
@@ -178,82 +177,46 @@ const hackWars = {
 
   },
  
-
   createBackground() {
     this.background = new Background(this.ctx, 0,  0,  this.canvasSize.width,  this.canvasSize.height,  5,  "background_2.png");
   },
 
-  killEnemies(key) {
+  killEnemies(arr) {
     
-    if (key === 'Q' && this.leftEnemy.length > 0) {
-      this.score += this.leftEnemy[0].points;
-      this.leftEnemy.splice(0,1);
+    if (arr.length > 0) {
+      this.score += arr[0].points;
+      arr.splice(0,1);
       console.log(this.score);
     } 
-    else if (key === 'Q' && this.leftEnemy.length === 0){
+    else if (arr.length === 0){
       this.playerHP--
       this.playerHpArray.splice(0,1);
       console.log(this.playerHP)
     }
-    else if (key === 'W' && this.middleEnemy.length > 0) {
-      this.score += this.middleEnemy[0].points;
-      this.middleEnemy.splice(0,1);
-      console.log(this.score);
-    } 
-    else if (key === 'W' && this.middleEnemy.length === 0){
-      this.playerHP--
-      this.playerHpArray.splice(0,1);
-      console.log(this.playerHP)
-    
-    }else if (key === "E" && this.rightEnemy.length > 0) {
-      this.score += this.rightEnemy[0].points;
-      this.rightEnemy.splice(0,1);
-      console.log(this.score);
-    }
-    else if (key === 'E' && this.rightEnemy.length === 0){
-      this.playerHP--
-      this.playerHpArray.splice(0,1);
-      console.log(this.playerHP)
-    } 
 
   },
 
-  clearEnemies() {
-
-    this.leftEnemy.filter((enemy, index) => {
+  clearEnemies(arr) {
+    arr.filter((enemy, index) => {
       if (enemy.toDelete) {
-        this.playerHP -= this.leftEnemy[0].dmg;
-        this.leftEnemy.splice(index, 1);
-        this.playerHpArray.splice(0,1);
-        sounds.enemyBlaster.play();
+        this.playerHP -= arr[0].dmg;
+        if (arr[0].dmg !==0){
+          this.playerHpArray.splice(0,1);
+          sounds.enemyBlaster.play();  
+        } else{
+          sounds.r2d2.play();
+        }
+        arr.splice(index, 1);
       } else {
         return enemy
       }
     })
+  },
 
-    this.middleEnemy.filter((enemy, index) => {
-      if (enemy.toDelete) {
-        this.playerHP -= this.middleEnemy[0].dmg;
-        this.middleEnemy.splice(index, 1);
-        this.playerHpArray.splice(0,1);
-        sounds.enemyBlaster.play();
-      } else {
-        return enemy
-      }
-    })
-
-    this.rightEnemy.filter((enemy, index) => {
-      if (enemy.toDelete) {
-        this.playerHP -= this.rightEnemy[0].dmg;
-        this.rightEnemy.splice(index, 1);
-        this.playerHpArray.splice(0,1);
-        sounds.enemyBlaster.play();
-        
-      } else {
-        return enemy
-      }
-    })
-
+  clearAllEnemies() {
+    this.clearEnemies(this.leftEnemy)
+    this.clearEnemies(this.middleEnemy)
+    this.clearEnemies(this.rightEnemy)
   },
 
   createAll() {
@@ -275,19 +238,16 @@ const hackWars = {
     document.onkeyup = (e) => {
 
       if (e.key === this.keys.player.Q) {
-        this.killEnemies('Q');
+        this.killEnemies(this.leftEnemy);
         sounds.playerBlaster.play();
-        console.log("hola Q");
       }
       if (e.key === this.keys.player.W) {
-        this.killEnemies('W');
+        this.killEnemies(this.middleEnemy);
         sounds.playerBlaster.play();
-        console.log("hola W");
       }
       if (e.key === this.keys.player.E) {
-        this.killEnemies('E');
+        this.killEnemies(this.rightEnemy);
         sounds.playerBlaster.play();
-        console.log("hola E");
       }
     }
 
