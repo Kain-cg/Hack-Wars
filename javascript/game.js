@@ -23,7 +23,7 @@ const hackWars = {
   allEnemies: [],
   score: 0,
   playerHP: 5,
-  playerHpArray: ['a;','a;','a;', 'a;','a;'],          // crear una clase playerHpArray y añadirle de atributo un imageName como en el background.
+  playerHpArray: ['$','$','$','$','$'],          // crear una clase playerHpArray y añadirle de atributo un imageName como en el background.
   keys: {
     player: {
       Q: "q", // KeyQ
@@ -87,16 +87,16 @@ const hackWars = {
   },
 
   scoreWall() {
-      this.ctx.fillStyle = 'white'
-      this.ctx.font = "100px border 1px solid white"
-      this.ctx.fillText('Score: ' + this.score, 40, 100)
+      this.ctx.fillStyle = 'white';
+      this.ctx.font = "100px border 1px solid white";
+      this.ctx.fillText('Score: ' + this.score, 40, 100);
   },
 
 
   lifeWall() {
-    this.ctx.fillStyle = 'white'
-    this.ctx.font = "40px Star Jedi"
-    this.ctx.fillText('Lives: ' + this.playerHpArray, 500, 650)
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = "40px Star Jedi";
+    this.ctx.fillText('Lives: ' + this.playerHpArray, 440, 700);
 },
   
   pickRandomEnemy() {
