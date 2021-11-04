@@ -1,22 +1,28 @@
-/* .SplashScreen {
-    display: show;
-    background-color: red;
-    width: 100%;
-    height: 100%;
+* {
+    margin: 0;
+    padding: 0;
+    background-color: black;
 }
-
-.SplashScreenOff {
+h1 {
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+#splash-screen {
+    background-image: url('./img/bckgrnd.jpg');
+    height: 100vh;
+    width: 209vh;
+}
+.screen-off {
     display: none;
 }
-
-
-
+.screen-on {
+    display: initial;
+}
 #canvas {
     height: 720px;
     width: 1280px;
-    display: none;
-} */
-
+}
 #game-board {
     display: flex;
     align-items: center;

@@ -16,6 +16,7 @@ const hackWars = {
   leftDoor: undefined,
   middleDoor: undefined,
   rightDoor: undefined,
+  music: undefined,
   leftEnemy: [],
   middleEnemy: [],
   rightEnemy: [],
@@ -55,35 +56,13 @@ const hackWars = {
 
   start() {
     
-/*     sounds.music.preload = "auto";
+     sounds.music.preload = "auto";
      sounds.music.load();
      sounds.music.play();
-     sounds.music.volume = 0.6; */
+     sounds.music.volume = 0.6;
+
     this.intervalId = setInterval(() => {
       this.framesCounter++;
-
-    //   if (this.framesCounter % 60 === 0) {
-    //     this.seconds++;
-    //   }
-
-    //   if (this.seconds && this.seconds % 1 === 0) {
-    //     this.seconds = 0;
-    //     const randomNumber = Math.floor(Math.random() * 3)
-
-    //     if (randomNumber === 0 && this.leftEnemy.length === 0){
-    //       this.createEnemies();
-
-    //     } else if (randomNumber === 1 && this.middleEnemy.length === 0) {
-    //       this.createmiddleEnemy();
-
-    //     } else if (randomNumber === 2 && this.rightEnemy.length === 0) {
-    //       this.createrightEnemy();
-
-    //     } else if (this.leftEnemy.length > 0 || this.middleEnemy.length > 0 || this.rightEnemy.length > 0) {
-    //     this.clearEnemies();
-    //   }
-
-    // }
 
       this.randomPlacement();
 
@@ -94,7 +73,7 @@ const hackWars = {
         console.log("you lose, sucka");
       }
 
-      if (this.score === 200) {
+      if (this.score === 300) {
         this.winGame();
         console.log("a winner is you");
       }
@@ -118,7 +97,7 @@ const hackWars = {
   lifeWall() {
     this.ctx.fillStyle = 'white'
     this.ctx.font = "40px Star Jedi"
-    this.ctx.fillText('Lives: ' + this.playerHpArray, 1000, 650)
+    this.ctx.fillText('Lives: ' + this.playerHpArray, 500, 650)
 },
   
   pickRandomEnemy() {
@@ -127,15 +106,30 @@ const hackWars = {
     return randomEnemy
   },
 
+  scoreSpeedIncreaser() {
+    if (this.score >= 25) {
+      return spawnSpeedIncrease = 75;
+    }
+    if (this.score >= 50) {
+      return spawnSpeedIncrease = 50;
+    }
+    if (this.score >= 100) {
+      return spawnSpeedIncrease = 25;
+    }
+    if (this.score >= 150) {
+      return spawnSpeedIncrease = 10;
+    }
+  },
+
   randomPlacement() {
 
     if (this.framesCounter % 60 === 0) {
       this.seconds++;
     }
 
-    const enemy = this.pickRandomEnemy()
+    const enemy = this.pickRandomEnemy() 
 
-    if (this.seconds && this.seconds % 2 === 0) {
+    if (this.seconds && this.seconds % 2 === 0  || Math.floor(Math.random() * this.scoreSpeedIncreaser()) == 0) {
       this.seconds = 0;
       const randomNumber = Math.floor(Math.random() * 3)
       
@@ -154,19 +148,17 @@ const hackWars = {
     } else if (randomNumber === 2 && this.rightEnemy.length === 0) {
       this.rightEnemy.push(new Character(...enemy));
     }
-    //  else if (this.leftEnemy.length > 0 || this.middleEnemy.length > 0 || this.rightEnemy.length > 0) {
-    //   this.clearEnemies();
-    // }
+    
   },
-
 
   setGameVariables() {
     this.leftDoor = new Position(90, 340);
     this.middleDoor = new Position(570, 340);
     this.rightDoor = new Position(1050, 340);
     this.allEnemies = [
-      ['trooper1.png', 220, 150, 5, 1, 2000], 
-      ['darktrooper1.png', 220, 150, 10, 3, 3000]  
+      ['trooper1.png', 220, 150, 5, 1, 2000, 1], 
+      ['darktrooper1.png', 220, 150, 10, 3, 3000, 1],
+      // ['ar2di2.png', 220, 150, -25, 1, 2000, 0]  
     ];
   },
   
@@ -191,80 +183,47 @@ const hackWars = {
     this.background = new Background(this.ctx, 0,  0,  this.canvasSize.width,  this.canvasSize.height,  5,  "background_2.png");
   },
 
-  // createEnemies() {
-  //   this.leftEnemy.push(new Character(this.ctx, 90, 360, 150, 240, 'trooper1.png'));   //100
-  //   console.log("enemigo creado");
-  // },
-
-  // createmiddleEnemy() {
-  //   this.middleEnemy.push(new Character(this.ctx, 570, 340, 150, 240, 'trooper1.png'));    //618
-  //   console.log("enemigo 2 creado");
-
-  // },
-
-  // createrightEnemy() {
-  //   this.rightEnemy.push(new Character(this.ctx, 1050, 340, 150, 240, 'darktrooper1.png'));     //1160
-  //   console.log("enemigo 3 creado");
-
-  // },
-
   killEnemies(key) {
     
     if (key === 'Q' && this.leftEnemy.length > 0) {
+      this.score += this.leftEnemy[0].points;
       this.leftEnemy.splice(0,1);
-      this.score += 5;
-      // this.blaster1.play();
       console.log(this.score);
     } 
     else if (key === 'Q' && this.leftEnemy.length === 0){
       this.playerHP--
+      this.playerHpArray.splice(0,1);
       console.log(this.playerHP)
     }
     else if (key === 'W' && this.middleEnemy.length > 0) {
+      this.score += this.middleEnemy[0].points;
       this.middleEnemy.splice(0,1);
-      this.score += 5;
       console.log(this.score);
     } 
     else if (key === 'W' && this.middleEnemy.length === 0){
       this.playerHP--
+      this.playerHpArray.splice(0,1);
       console.log(this.playerHP)
     
     }else if (key === "E" && this.rightEnemy.length > 0) {
+      this.score += this.rightEnemy[0].points;
       this.rightEnemy.splice(0,1);
-      this.score += 5;
       console.log(this.score);
     }
     else if (key === 'E' && this.rightEnemy.length === 0){
       this.playerHP--
+      this.playerHpArray.splice(0,1);
       console.log(this.playerHP)
     } 
-    // falta else if rightEnemy blabla
-    
-    // if (this.leftEnemy.length > 0) {
-    //   this.leftEnemy.splice(0,1);
-    //   this.score += 5;
-    //   console.log(this.score);
-    // }
 
   },
-
-  // killEnemiesW() {
-    
-  //   if (this.middleEnemy.length > 0) {
-  //     this.middleEnemy.splice(0,1);
-  //     this.score += 5;
-  //     console.log(this.score);
-  //   }
-
-  // },
 
   clearEnemies() {
 
     this.leftEnemy.filter((enemy, index) => {
       if (enemy.toDelete) {
-        console.log('soy todelete de la izq')
+        this.playerHP -= this.leftEnemy[0].dmg;
         this.leftEnemy.splice(index, 1);
-        this.playerHP--;
         this.playerHpArray.splice(0,1);
         sounds.enemyBlaster.play();
       } else {
@@ -274,9 +233,8 @@ const hackWars = {
 
     this.middleEnemy.filter((enemy, index) => {
       if (enemy.toDelete) {
-        console.log('soy todelete del medio')
+        this.playerHP -= this.middleEnemy[0].dmg;
         this.middleEnemy.splice(index, 1);
-        this.playerHP--;
         this.playerHpArray.splice(0,1);
         sounds.enemyBlaster.play();
       } else {
@@ -286,10 +244,9 @@ const hackWars = {
 
     this.rightEnemy.filter((enemy, index) => {
       if (enemy.toDelete) {
-        console.log('soy todelete de la dcha')
+        this.playerHP -= this.rightEnemy[0].dmg;
         this.rightEnemy.splice(index, 1);
         this.playerHpArray.splice(0,1);
-        this.playerHP--;
         sounds.enemyBlaster.play();
         
       } else {
@@ -297,28 +254,7 @@ const hackWars = {
       }
     })
 
-    // if (this.leftEnemy.length > 0) {
-    //   this.leftEnemy.splice(0,1);
-    //   this.playerHP--;
-    //   console.log(this.playerHP);
-    // } 
-    // if (this.middleEnemy.length > 0) {
-    //   this.middleEnemy.splice(0,1);
-    //   this.playerHP--;
-    //   console.log(this.playerHP);
-    // } 
-    // if (this.rightEnemy.length > 0) {
-    //   this.rightEnemy.splice(0,1);
-    //   this.playerHP--;
-    //   console.log(this.playerHP);
-    // }
   },
-
-  // loseHP() {
-
-
-
-  // },
 
   createAll() {
     this.createBackground();  
@@ -326,8 +262,8 @@ const hackWars = {
 
   gameOver() {
     clearInterval(this.intervalId);
-/*     sounds.music.pause();
-    sounds.music.currentTime = 0; */
+    sounds.music.pause();
+    sounds.music.currentTime = 0;
   },
 
   winGame() {

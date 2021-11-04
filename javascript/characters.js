@@ -1,5 +1,5 @@
 class Character {
-    constructor (imageName, height, width, points, enemyHP, lifeTime) {
+    constructor (imageName, height, width, points, enemyHP, lifeTime, dmg) {
 
     // this.ctx = ctx;
     // this.posX = posX;
@@ -11,6 +11,7 @@ class Character {
     this.enemyHP = enemyHP;
     this.toDelete = false;
     this.lifeTime = lifeTime;
+    this.dmg = dmg;
     this.init();
 /*     this.fillStyle = fillStyle;
  */

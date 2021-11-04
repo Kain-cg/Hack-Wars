@@ -1,3 +1,3 @@
 window.onload = () => {
-    hackWars.init()
+    // hackWars.init()
   }
