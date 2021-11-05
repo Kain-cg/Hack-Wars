@@ -73,7 +73,7 @@ const hackWars = {
         console.log("you lose, sucka");
       }
 
-      if (this.score >= 1) {
+      if (this.score >= 300) {
         this.winGame();
         console.log("a winner is you");
       }
