@@ -73,7 +73,7 @@ const hackWars = {
         console.log("you lose, sucka");
       }
 
-      if (this.score >= 350) {
+      if (this.score >= 1) {
         this.winGame();
         console.log("a winner is you");
       }
@@ -161,7 +161,7 @@ const hackWars = {
       ['trooper1.png', 220, 150, 5, 1, 2000, 1], 
       ['darktrooper1.png', 230, 150, 10, 3, 1500, 1],
       ['ar2di2.png', 220, 150, -25, 1, 2000, 0],
-      ['jawa.png', 220, 150, 20, 1, 1000, 0],
+      ['jawa.png', 220, 150, 20, 1, 800, 1],
     ];
   },
   
